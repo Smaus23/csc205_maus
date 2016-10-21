@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HCI_Project.Models.Individual>
+    @{
+        ViewBag.Title = "Individual Members";
+    }
+
+    <h2>Individuals</h2>
+    <p>Page is currently under construction.</p>
+    <p>
+        Select from @Model.Count()
+        people:
+    </p>
+    <ul>
+        @foreach (var individual in Model)
+            {
+            <li>@individual.firstname @individual.lastname - @individual.cell</li>
+            @Html.ActionLink("Details", "details/0")
+        }
+    </ul>
+
+
+

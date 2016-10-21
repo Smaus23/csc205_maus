@@ -1,0 +1,19 @@
+﻿@model IEnumerable<HCI_Project.Models.Family>
+@{
+    ViewBag.Title = "Families";
+}
+
+<h2>Families</h2>
+<p>Page is currently under construction.</p>
+<p>
+    Select from @Model.Count()
+    families:
+</p>
+<ul>
+    @foreach (var family in Model)
+            {
+        <li>@family.familyname, @family.city, @family.state</li>      
+          @Html.ActionLink("Details", "details/0")
+    }
+</ul>
+
