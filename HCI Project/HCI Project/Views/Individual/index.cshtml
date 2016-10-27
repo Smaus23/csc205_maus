@@ -13,7 +13,7 @@
         @foreach (var individual in Model)
             {
             <li>@individual.firstname @individual.lastname - @individual.cell</li>
-            @Html.ActionLink("Details", "details/0")
+            @Html.ActionLink("Details", "Details", new { id = individual.id })
         }
     </ul>
 

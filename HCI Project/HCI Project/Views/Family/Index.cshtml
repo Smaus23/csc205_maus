@@ -13,7 +13,7 @@
     @foreach (var family in Model)
             {
         <li>@family.familyname, @family.city, @family.state</li>      
-          @Html.ActionLink("Details", "details/0")
+          @Html.ActionLink("Details", "Details", new { id = family.id })
     }
 </ul>
 
