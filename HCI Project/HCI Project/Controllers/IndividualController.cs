@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using HCI_Project.Models;
 
 namespace HCI_Project.Controllers
@@ -32,18 +33,31 @@ namespace HCI_Project.Controllers
 
         }
 
+        protected override void Initialize(RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+            if (Session["individualList"] == null)
+            {
+                Session["individualList"] = individual;
+            }
+        }
+
         // GET: Person
         public ActionResult Index()
         {
+            var p = (List<Individual>)Session["individualList"];
             return View(individual);
         }
 
         // GET: Person/Details/5
         public ActionResult Details(int id)
         {
-            var p = individual[id];
+            var pList = (List<Individual>)Session["individualList"];
+            var p = pList[id];
 
-            return View(p);
+            var i = individual[id];
+
+            return View(i);
         }
 
         // GET: Person/Create
@@ -56,11 +70,29 @@ namespace HCI_Project.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+
             try
             {
-                // TODO: Add insert logic here
+                Individual newIndividual = new Individual()
+                {
+                    id = 99,
+                    firstname = collection["firstname"],
+                    middlename = collection["middlename"],
+                    lastname = collection["lastname"],
+                    cell = collection["cell"],
+                    relationship = collection["relationship"],
+                    familyId = int.Parse(collection["familyId"]
+                    )
+                };
 
-                return RedirectToAction("index");
+                // Add the person to the list
+                individual = (List<Individual>)Session["individualList"];
+                individual.Add(newIndividual);
+
+                // Save the list to the session
+                Session["individualList"] = individual;
+
+                return RedirectToAction("Index");
             }
             catch
             {

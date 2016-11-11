@@ -8,13 +8,65 @@
         Select from @Model.Count()
         people:
     </p>
-    <ul>
-        @foreach (var individual in Model)
-            {
-            <li>@individual.firstname @individual.lastname - @individual.cell</li>
-            @Html.ActionLink("Details", "Details", new { id = individual.id })
-        }
-    </ul>
+@Html.ActionLink("Create", "Create")
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.middlename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cell)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.relationship)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.familyId)
+        </th>
+    </tr>
+
+    @foreach (var individual in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => individual.firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => individual.middlename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => individual.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => individual.cell)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => individual.relationship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => individual.familyId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = individual.id }) |
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = individual.id }) |
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = individual.id }) 
+            </td>
+        </tr>
+    } 
+</table>
+
+ 
+    
 
 
 

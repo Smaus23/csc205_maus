@@ -8,11 +8,69 @@
     Select from @Model.Count()
     families:
 </p>
-<ul>
+@Html.ActionLink("Create", "Create")
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.familyname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.homephone)
+        </th>
+    </tr>
+
     @foreach (var family in Model)
-            {
-        <li>@family.familyname, @family.city, @family.state</li>      
-          @Html.ActionLink("Details", "Details", new { id = family.id })
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => family.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.familyname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => family.homephone)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = family.id }) |
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = family.id }) |
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = family.id }) 
+            </td>
+        </tr>
     }
-</ul>
+</table>
+
+
+
 

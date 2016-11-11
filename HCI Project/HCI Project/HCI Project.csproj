@@ -212,8 +212,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\FamilyTree.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -275,6 +275,8 @@
     <Content Include="Views\Family\Index.cshtml" />
     <Content Include="Views\Family\details.cshtml" />
     <Content Include="Views\Individual\details.cshtml" />
+    <Content Include="Views\Individual\create.cshtml" />
+    <Content Include="Views\Family\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
