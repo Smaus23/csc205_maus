@@ -277,6 +277,10 @@
     <Content Include="Views\Individual\details.cshtml" />
     <Content Include="Views\Individual\create.cshtml" />
     <Content Include="Views\Family\create.cshtml" />
+    <Content Include="Views\Family\delete.cshtml" />
+    <Content Include="Views\Individual\delete.cshtml" />
+    <Content Include="Views\Family\edit.cshtml" />
+    <Content Include="Views\Individual\edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

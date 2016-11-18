@@ -38,19 +38,16 @@ namespace HCI_Project.Controllers
         // GET: Family
         public ActionResult Index()
             {
-            var p = (List<Family>)Session["familyList"];
+            var families = (List<Family>)Session["familyList"];
             return View(families);
             }
 
             // GET: Family/Details/5
             public ActionResult Details(int id)
             {
-            var pList = (List<Family>)Session["familyList"];
-            var p = pList[id];
-
+            var families = (List<Family>)Session["familyList"];
             var f = families[id];
-
-                return View(f);
+            return View(f);
             }
 
         // GET: Family/Create
@@ -67,7 +64,7 @@ namespace HCI_Project.Controllers
             {  
                 Family newFamily = new Family()
                 {
-                    id = 7,
+                    id = families.Count,
                     familyname = collection["familyname"],
                     address1 = collection["address1"],
                     city = collection["city"],
@@ -78,7 +75,6 @@ namespace HCI_Project.Controllers
 
                 var f = (List<Family>)Session["familyList"];
                 f.Add(newFamily);
-                Debug.WriteLine(f);
                 // Save the list to the session
                 Session["familyList"] = f;
 
@@ -93,7 +89,9 @@ namespace HCI_Project.Controllers
         // GET: Family/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var f = families[id];
+
+            return View(f);
         }
 
         // POST: Family/Edit/5
@@ -102,7 +100,33 @@ namespace HCI_Project.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                var families = (List<Family>)Session["familyList"];
+                var f = families[id];
+
+                Family newFamily = new Family()
+                {
+                    id = families.Count,
+                    familyname = collection["familyname"],
+                    address1 = collection["address1"],
+                    city = collection["city"],
+                    state = collection["state"],
+                    zip = collection["zip"],
+                    homephone = collection["homephone"]
+                };
+
+                families.Where(x => x.id == id).First().familyname = collection["familyname"];
+                families.Where(x => x.id == id).First().address1 = collection["address1"];
+                families.Where(x => x.id == id).First().city = collection["city"];
+                families.Where(x => x.id == id).First().state = collection["state"];
+                families.Where(x => x.id == id).First().zip = collection["zip"];
+                families.Where(x => x.id == id).First().homephone = collection["homephone"];
+
+
+                for (int x = id; x < families.Count(); x++)
+                {
+                    if (families[x] != null)
+                        families[x].id = x;
+                }
 
                 return RedirectToAction("index");
             }
@@ -115,7 +139,8 @@ namespace HCI_Project.Controllers
         // GET: Family/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var f = families[id];
+            return View(f);
         }
 
         // POST: Family/Delete/5
@@ -124,14 +149,25 @@ namespace HCI_Project.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                var families = (List<Family>)Session["familyList"];
+                var f = families[id];
+                families.Remove(f);
+                // Save the list to the session
+                Session["familyList"] = families;
 
-                return RedirectToAction("index");
+                for (int x = id; x < families.Count(); x++)
+                {
+                    if (families[x] != null)
+                        families[x].id = x;
+                }
+
+                return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
         }
+
     }
 }

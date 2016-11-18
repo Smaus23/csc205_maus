@@ -1,0 +1,29 @@
+﻿@model HCI_Project.Models.Family
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Deleted Family</h2>
+<h4>Delete @Html.DisplayFor(model => model.familyname) Family?</h4>
+<p>Are you sure you want to delete the @Html.DisplayFor(model => model.familyname) family?</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

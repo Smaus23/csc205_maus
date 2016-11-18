@@ -45,18 +45,15 @@ namespace HCI_Project.Controllers
         // GET: Person
         public ActionResult Index()
         {
-            var p = (List<Individual>)Session["individualList"];
+            var individual = (List<Individual>)Session["individualList"];
             return View(individual);
         }
 
         // GET: Person/Details/5
         public ActionResult Details(int id)
         {
-            var pList = (List<Individual>)Session["individualList"];
-            var p = pList[id];
-
+            var individual = (List<Individual>)Session["individualList"];
             var i = individual[id];
-
             return View(i);
         }
 
@@ -75,7 +72,7 @@ namespace HCI_Project.Controllers
             {
                 Individual newIndividual = new Individual()
                 {
-                    id = 99,
+                    id = individual.Count,
                     firstname = collection["firstname"],
                     middlename = collection["middlename"],
                     lastname = collection["lastname"],
@@ -103,7 +100,9 @@ namespace HCI_Project.Controllers
         // GET: Person/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var i = individual[id];
+
+            return View(i);
         }
 
         // POST: Person/Edit/5
@@ -112,7 +111,33 @@ namespace HCI_Project.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                var individual = (List<Individual>)Session["individualList"];
+                var i = individual[id];
+
+                Individual newIndividual = new Individual()
+                {
+                    id = individual.Count,
+                    firstname = collection["firstname"],
+                    middlename = collection["middlename"],
+                    lastname = collection["lastname"],
+                    cell = collection["cell"],
+                    relationship = collection["relationship"],
+                    familyId = int.Parse(collection["familyId"]
+                   )
+                };
+
+                individual.Where(x => x.id == id).First().firstname = collection["firstname"];
+                individual.Where(x => x.id == id).First().middlename = collection["middlename"];
+                individual.Where(x => x.id == id).First().lastname = collection["lastname"];
+                individual.Where(x => x.id == id).First().cell = collection["cell"];
+                individual.Where(x => x.id == id).First().relationship = collection["relationship"];
+                individual.Where(x => x.id == id).First().familyId = int.Parse(collection["familyId"]);
+
+                for (int x = id; x < individual.Count(); x++)
+                {
+                    if (individual[x] != null)
+                        individual[x].id = x;
+                }
 
                 return RedirectToAction("index");
             }
@@ -125,7 +150,9 @@ namespace HCI_Project.Controllers
         // GET: Person/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var i = individual[id];
+
+            return View(i);
         }
 
         // POST: Person/Delete/5
@@ -134,7 +161,18 @@ namespace HCI_Project.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                var individual = (List<Individual>)Session["individualList"];
+                var i = individual[id];
+                individual.Remove(i);
+                // Save the list to the session
+                Session["individualList"] = individual;
+
+                for (int x = id; x < individual.Count(); x++)
+                {
+                    if (individual[x] != null)
+                        individual[x].id = x;
+                }
+
 
                 return RedirectToAction("index");
             }
