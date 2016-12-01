@@ -70,6 +70,7 @@ namespace HCI_Project.Controllers
 
             try
             {
+                individual = (List<Individual>)Session["individualList"];
                 Individual newIndividual = new Individual()
                 {
                     id = individual.Count,
@@ -100,6 +101,7 @@ namespace HCI_Project.Controllers
         // GET: Person/Edit/5
         public ActionResult Edit(int id)
         {
+            var individual = (List<Individual>)Session["individualList"];
             var i = individual[id];
 
             return View(i);
@@ -150,6 +152,7 @@ namespace HCI_Project.Controllers
         // GET: Person/Delete/5
         public ActionResult Delete(int id)
         {
+            var individual = (List<Individual>)Session["individualList"];
             var i = individual[id];
 
             return View(i);

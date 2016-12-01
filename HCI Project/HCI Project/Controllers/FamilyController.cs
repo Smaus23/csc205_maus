@@ -61,7 +61,8 @@ namespace HCI_Project.Controllers
         public ActionResult Create(FormCollection collection)
         {
             try
-            {  
+            {
+                families = (List<Family>)Session["familyList"];
                 Family newFamily = new Family()
                 {
                     id = families.Count,
@@ -89,6 +90,7 @@ namespace HCI_Project.Controllers
         // GET: Family/Edit/5
         public ActionResult Edit(int id)
         {
+            var families = (List<Family>)Session["familyList"];
             var f = families[id];
 
             return View(f);
@@ -139,6 +141,7 @@ namespace HCI_Project.Controllers
         // GET: Family/Delete/5
         public ActionResult Delete(int id)
         {
+            var families = (List<Family>)Session["familyList"];
             var f = families[id];
             return View(f);
         }
